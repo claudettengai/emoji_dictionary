@@ -13,7 +13,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var coolTableView: UITableView!
     
     
-    var emojis = ["🍟", "🍆", "💄", "👙", "🐳", "🐹", "🐙"]
+    var emojis : [Emoji] = []
     
     
     override func viewDidLoad() {
@@ -22,6 +22,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         coolTableView.dataSource = self
         coolTableView.delegate = self
+        emojis = makeEmojiArray()
         
     }
     
@@ -35,7 +36,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print(indexPath.row)
         let cell = UITableViewCell()
-        cell.textLabel?.text = emojis[indexPath.row]
+        let emoji = emojis[indexPath.row]
+        cell.textLabel?.text = emoji.stringEmoji
         return cell
     }
     
@@ -52,7 +54,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let defVC = segue.destination as! DefinitionViewController
-        defVC.emoji = sender as! String
+        defVC.emoji = sender as! Emoji
     }
     
 
@@ -62,5 +64,53 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
 
+    
+    
+    
+    func makeEmojiArray() -> [Emoji] {
+        let emoji1 = Emoji()
+        emoji1.stringEmoji = "🍟"
+        emoji1.birthYear = 2010
+        emoji1.category = "Food"
+        emoji1.definition = "Delicious french fries"
+        
+        let emoji2 = Emoji()
+        emoji2.stringEmoji = "🍆"
+        emoji2.birthYear = 2010
+        emoji2.category = "Food"
+        emoji2.definition = "Delicious eggplant"
+        
+        let emoji3 = Emoji()
+        emoji3.stringEmoji = "💄"
+        emoji3.birthYear = 2010
+        emoji3.category = "Make up"
+        emoji3.definition = "Ruby Woo red lipstick!"
+        
+        let emoji4 = Emoji()
+        emoji4.stringEmoji = "👙"
+        emoji4.birthYear = 2010
+        emoji4.category = "Clothing"
+        emoji4.definition = "Teeny bikini"
+        
+        let emoji5 = Emoji()
+        emoji5.stringEmoji = "🐳"
+        emoji5.birthYear = 2010
+        emoji5.category = "Animal"
+        emoji5.definition = "Whale blowing water from spout"
+        
+        let emoji6 = Emoji()
+        emoji6.stringEmoji = "🐹"
+        emoji6.birthYear = 2010
+        emoji6.category = "Animal"
+        emoji6.definition = "A hamster being a hamster"
+        
+        let emoji7 = Emoji()
+        emoji7.stringEmoji = "🐙"
+        emoji7.birthYear = 2010
+        emoji7.category = "Animal"
+        emoji7.definition = "An octopus or squid that looks cute"
+        
+        return [emoji1, emoji2, emoji3, emoji4, emoji5, emoji6, emoji7]
+    }
 }
 
